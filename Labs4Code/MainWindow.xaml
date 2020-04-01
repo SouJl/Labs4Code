@@ -1,0 +1,45 @@
+﻿<Controls:MetroWindow
+    x:Class="Labs4Code.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    WindowStyle="None"
+    Title="MainWindow"
+    ResizeMode="CanResize"
+    SizeToContent="Manual"
+    FontSize="20"
+    Width="300"
+    Height="400"
+    WindowStartupLocation="CenterScreen">
+    <StackPanel
+        Margin="10,20,10,10">
+        <Button
+            Content="Лабораторная 1"
+            Background="Orange"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            MaxWidth="200"
+            MinHeight="40"
+            Command="{Binding OpenLab1Command}"
+            Margin="5" />
+        <Button
+            Content="Лабораторная 2"
+            Background="Orange"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            MinHeight="40"
+            MaxWidth="200"
+            Command="{Binding OpenLab2Command}"
+            Margin="5" />
+        <Button
+            Content="Лабораторная 3"
+            Background="Orange"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            MinHeight="40"
+            MaxWidth="200"
+            Command="{Binding OpenLab2Command}"
+            Margin="5" />
+    </StackPanel>
+</Controls:MetroWindow>
