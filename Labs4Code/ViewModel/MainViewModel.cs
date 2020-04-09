@@ -16,10 +16,11 @@ namespace Labs4Code.ViewModel
 
         public VernanCodeModel VernamCrypt { get; set; }
 
+        public BlockEncrypteModel DesCrypt { get; set; }
+
         public MainViewModel()
         {
-            CesarKrypt = new CesarCodeModel();
-            VernamCrypt = new VernanCodeModel();
+
         }
 
         public ICommand OpenLab1Command
@@ -28,6 +29,7 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    CesarKrypt = new CesarCodeModel();
                     var openwindow = new CesarWindow()
                     {
                         DataContext = this,
@@ -43,8 +45,8 @@ namespace Labs4Code.ViewModel
                 return new RelayCommand(sender =>
                 {
                     VernamCrypt = new VernanCodeModel();
-
-                    var openwindow = new CesarWindow()
+                    DesCrypt = new BlockEncrypteModel();
+                    var openwindow = new Lab2Window()
                     {
                         DataContext = this,
                     };

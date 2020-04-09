@@ -1,0 +1,230 @@
+﻿<control:MetroWindow
+    x:Class="Labs4Code.View.Lab2Window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:convert="clr-namespace:Labs4Code.Converter"
+    ResizeMode="CanResize"
+    WindowStartupLocation="CenterScreen"
+    ShowIconOnTitleBar="True"
+    SizeToContent="WidthAndHeight"
+    Title="Лабораторная №2"
+    FontSize="18"
+    MinWidth="500"
+    MaxWidth="500"
+    MinHeight="600">
+    
+    <StackPanel
+        Background="LightGray">
+        <Label 
+            Content="Метод Вернама"
+            HorizontalAlignment="Center"
+            Margin="0,5"
+            FontWeight="DemiBold"/>
+        <Separator
+            Height="5"
+            Margin="10,0,10,5"
+            Background="Black">
+        </Separator>
+        <Grid
+            DataContext="{Binding VernamCrypt}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="1.2*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0">
+                <Label
+                    Content="Ключ:"
+                    Margin="5"
+                    Foreground="Coral"
+                    FontWeight="DemiBold" />
+                <TextBox
+                    BorderBrush="Black"
+                    Margin="5"
+                    Text="{Binding Key}"
+                    MinWidth="150"
+                    FontSize="20"
+                    Width="250"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    HorizontalScrollBarVisibility="Auto" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="0">
+                <Label
+                    Content="Ввод/вывод текста:"
+                    Margin="5"
+                    Foreground="Coral"
+                    FontWeight="DemiBold" />
+                <TextBox
+                    BorderBrush="Black"
+                    Margin="5"
+                    Text="{Binding Text}"
+                    MinWidth="150"
+                    FontSize="20"
+                    Width="250"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    HorizontalScrollBarVisibility="Auto" />
+            </StackPanel>
+            <Border
+                Grid.Column="1"
+                Grid.RowSpan="3"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Margin="5,10,5,5">
+                <StackPanel
+                    VerticalAlignment="Center">
+                    <Label 
+                        Content="Операции с ключом"
+                        FontSize="18"
+                        Foreground="Coral"
+                        FontWeight="DemiBold" 
+                        HorizontalAlignment="Center"/>
+                    <Button
+                        Command="{Binding RandKeyCommand}"
+                        Content="Сгенерировать ключ"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                    <Button
+                        Command="{Binding KeyFileCommand}"
+                        CommandParameter="Write"
+                        Content="Сохранить в файл"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                    <Button
+                        Command="{Binding KeyFileCommand}"
+                        CommandParameter="Read"
+                        Content="Загрузить из файла"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                </StackPanel>
+            </Border>
+            <DockPanel
+                Grid.Row="2">
+                <Button
+                    Command="{Binding EncrypteCommand}"
+                    DockPanel.Dock="Left"
+                    Content="Кодирование"
+                    Background="Coral"
+                    Height="40"
+                    Width="120"
+                    Margin="5,5"/>
+                <Button
+                    Command="{Binding DecrypteCommand}"
+                    DockPanel.Dock="Right"
+                    Content="Декодирование"
+                    Background="Coral"
+                    Height="40"
+                    Width="120"
+                    Margin="5,5"/>
+            </DockPanel>
+        </Grid>
+
+        <Separator
+            Height="5"
+            Margin="10,5,10,0"
+            Background="Black">
+        </Separator>
+        
+        <StackPanel
+            DataContext="{Binding DesCrypt}">
+            <Label
+                Content="Блочное шифрование"
+                HorizontalAlignment="Center"
+                Margin="0,5"
+                FontWeight="DemiBold" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition 
+                        Width="0.8*"/>
+                    <ColumnDefinition 
+                        Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="10,10">
+                    <TextBox 
+                        Height="125"
+                        BorderBrush="Black"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalContentAlignment="Left"
+                        Text="{Binding Text}"
+                        />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="5">
+                    <Button
+                        Command="{Binding EncrypteCommand}"
+                        Content="Кодирование"
+                        Background="Coral"
+                        Height="35"
+                        Margin="5" />
+                    <Button
+                        Command="{Binding DecrypteCommand}"
+                        Content="Декодирование"
+                        Background="Coral"
+                        Height="35"
+                        Margin="5" />
+                    <Button
+                        Command="{Binding KeyOpenParamCommand}"
+                        Content="Параметры"
+                        Background="Coral"
+                        Height="35"
+                        Margin="5" />
+                </StackPanel>
+            </Grid>
+            <Border
+                convert:BoolToVisibleConvert.IsVisible="{Binding Visibility}"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Command="{Binding RandKeyCommand}"
+                        Content="Сгенерировать ключ"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding LoadKeyCommand}"
+                        Content="Загрузить из файла"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                    <Button
+                        Grid.Column="2"
+                        Command="{Binding SaveKeyCommand}"
+                        Content="Сохранить в файл"
+                        Background="Coral"
+                        Height="35"
+                        Margin="10" />
+                </Grid>
+            </Border>
+        </StackPanel>
+
+    </StackPanel>
+</control:MetroWindow>
