@@ -18,6 +18,8 @@ namespace Labs4Code.ViewModel
 
         public BlockEncrypteModel DesCrypt { get; set; }
 
+        public HashLabModel MD5HashLab { get; set; }
+
         public MainViewModel()
         {
 
@@ -54,5 +56,23 @@ namespace Labs4Code.ViewModel
                 });
             }
         }
+
+        public ICommand OpenLab3Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    MD5HashLab = new HashLabModel();
+
+                    var openwindow = new Lab2Window()
+                    {
+                        DataContext = this,
+                    };
+                    openwindow.ShowDialog();
+                });
+            }
+        }
+
     }
 }

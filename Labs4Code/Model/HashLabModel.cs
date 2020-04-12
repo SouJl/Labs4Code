@@ -34,11 +34,11 @@ namespace Labs4Code.Model
         }
 
 
-        private string _range;
+        private int _range;
         /// <summary>
         /// Количество чисел.
         /// </summary>
-        public string Range
+        public int Range
         {
             get => _range;
             set
