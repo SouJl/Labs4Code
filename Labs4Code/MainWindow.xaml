@@ -39,7 +39,7 @@
             HorizontalContentAlignment="Center"
             MinHeight="40"
             MaxWidth="200"
-            Command="{Binding OpenLab2Command}"
+            Command="{Binding OpenLab3Command}"
             Margin="5" />
     </StackPanel>
 </Controls:MetroWindow>

@@ -65,7 +65,7 @@ namespace Labs4Code.ViewModel
                 {
                     MD5HashLab = new HashLabModel();
 
-                    var openwindow = new Lab2Window()
+                    var openwindow = new Lab3Window()
                     {
                         DataContext = this,
                     };

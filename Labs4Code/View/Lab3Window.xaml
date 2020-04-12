@@ -1,0 +1,58 @@
+﻿<control:MetroWindow
+    x:Class="Labs4Code.View.Lab3Window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    ResizeMode="CanResize"
+    WindowStartupLocation="CenterScreen"
+    ShowIconOnTitleBar="True"
+    SizeToContent="WidthAndHeight"
+    FontSize="18"
+    Title="Лабораторная №3">
+    <StackPanel
+        DataContext="{Binding MD5HashLab}">
+        <TextBlock 
+            Text="Генератор псевдо-случайных чисел"
+            TextWrapping="Wrap"
+            />
+        <Grid
+            Width="300"
+            Margin="2,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition 
+                    Width="0.8*"/>
+                <ColumnDefinition 
+                    Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0" 
+                Content="Кол-во значений:"/>
+            <control:NumericUpDown 
+                Grid.Column="1"
+                Value="{Binding Range}"
+                Minimum="0"
+                Maximum="255"
+                HorizontalContentAlignment="Center"
+                Margin="5,0"
+                />
+        </Grid>
+
+        <Button 
+            Content="Расчитать"
+            Foreground="White"
+            Background="{DynamicResource AccentColorBrush2}"
+            Margin="30,10"
+            Height="40"
+            FontSize="16"
+            Command="{Binding GetPSGCommand}"
+            />
+        <ListBox 
+            BorderBrush="{DynamicResource AccentColorBrush}"
+            BorderThickness="2"
+            Margin="4"
+            Height="150"
+            ItemsSource="{Binding ResultRandList}"
+            />
+    </StackPanel>
+</control:MetroWindow>
