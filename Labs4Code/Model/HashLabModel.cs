@@ -7,6 +7,8 @@ using Caliburn.Micro;
 using System.Security.Cryptography;
 using System.Windows.Input;
 using Labs4Code.Static;
+using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace Labs4Code.Model
 {
@@ -15,12 +17,23 @@ namespace Labs4Code.Model
     /// </summary>
     public class HashLabModel:PropertyChangedBase
     {
+        /// <summary>
+        /// Хэш - функция
+        /// </summary>
         private MD5 MD5HashFunc { get; set; }
 
+        private Random Rand { get; set; }
+
+        /// <summary>
+        /// Входной список с числовой последоватльностью полученной через Rand.
+        /// </summary>
         private List<int> RandList { get; set; }
 
-        private List<int> _resultRandList;
-        public List<int> ResultRandList 
+        private ObservableCollection<int> _resultRandList;
+        /// <summary>
+        /// Выходной список с полученной псевдо-случайной последовательностью.
+        /// </summary>
+        public ObservableCollection<int> ResultRandList 
         {
             get => _resultRandList;
             set
@@ -52,50 +65,76 @@ namespace Labs4Code.Model
         }
 
 
-        private const byte ValueCount = 10;
-
-        private Random Rand { get; set; }
-
         public HashLabModel()
         {
-            GetPSGCommand.Execute(0);
+
         }
 
+        /// <summary>
+        /// Команда генерации последовательности
+        /// </summary>
         public ICommand GetPSGCommand
         {
             get
             {
                 return new RelayCommand(sender =>
                 {
-                    ResultRandList = new List<int>();
+                    ResultRandList = new ObservableCollection<int>();
                     GetRandom();
-                    GetHash();
+                    GetHashList();
                 });
             }
         }
 
+        /// <summary>
+        /// Команда удаление элементов из списка.
+        /// </summary>
+        public ICommand СleanListCommand
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    if(ResultRandList.Any())
+                        ResultRandList.Clear();
+                    else
+                        MessageBox.Show("Список пуст!");
+                });
+            }
+        }
 
+        /// <summary>
+        /// Формирование списка входных значений.
+        /// </summary>
         private void GetRandom()
         {
             Rand = new Random();
             RandList = new List<int>();
-            int r_value = 0;
-            for (int i = 0; i < ValueCount; i++)
+            if (Range != 0)
             {
-                r_value = Rand.Next(0, 255);
-                if(!RandList.Contains(r_value))
-                    RandList.Add(r_value);
-                else
+                for (int i = 0; i < Range; i++)
                 {
-                    while (RandList.Contains(r_value)) r_value = Rand.Next(0, 255);
-                    RandList.Add(r_value);
+                    int r_value = Rand.Next(0, 255);
+                    if (!RandList.Contains(r_value))
+                        RandList.Add(r_value);
+                    else
+                    {
+                        while (RandList.Contains(r_value)) r_value = Rand.Next(0, 255);
+                        RandList.Add(r_value);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Ввидите количество элементов!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
 
-
-        private void GetHash()
+        /// <summary>
+        /// Получения списка хэш-значений.
+        /// </summary>
+        private void GetHashList()
         {
             using (MD5HashFunc = MD5.Create())
             {
@@ -110,6 +149,13 @@ namespace Labs4Code.Model
             }
         }
 
+
+        /// <summary>
+        /// Получение хэша от значения.
+        /// </summary>
+        /// <param name="md5Hash">хэш-функция</param>
+        /// <param name="input">значение</param>
+        /// <returns></returns>
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));

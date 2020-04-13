@@ -10,49 +10,78 @@
     SizeToContent="WidthAndHeight"
     FontSize="18"
     Title="Лабораторная №3">
-    <StackPanel
-        DataContext="{Binding MD5HashLab}">
-        <TextBlock 
+    <StackPanel>
+        <TextBlock
             Text="Генератор псевдо-случайных чисел"
-            TextWrapping="Wrap"
-            />
+            TextWrapping="Wrap" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="5,5,0,2"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource AccentColorBrush}"/>
+        <Separator 
+            Background="{DynamicResource AccentColorBrush2}"           
+            Margin="5,2"/>
         <Grid
-            Width="300"
-            Margin="2,10">
+            DataContext="{Binding MD5HashLab}"
+            Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition 
-                    Width="0.8*"/>
-                <ColumnDefinition 
-                    Width="0.4*"/>
+                <ColumnDefinition
+                    Width="0.5*" />
+                <ColumnDefinition
+                    Width="0.8*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0" 
-                Content="Кол-во значений:"/>
-            <control:NumericUpDown 
-                Grid.Column="1"
-                Value="{Binding Range}"
-                Minimum="0"
-                Maximum="255"
-                HorizontalContentAlignment="Center"
-                Margin="5,0"
-                />
-        </Grid>
+            <StackPanel
+                Grid.Column="0">
+                <Grid
+                    Width="300"
+                    Margin="2,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="0.8*" />
+                        <ColumnDefinition
+                            Width="0.4*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Content="Кол-во значений:" />
+                    <control:NumericUpDown
+                        Grid.Column="1"
+                        Value="{Binding Range}"
+                        Minimum="0"
+                        Maximum="255"
+                        HorizontalContentAlignment="Center"
+                        Margin="5,0" />
+                </Grid>
 
-        <Button 
-            Content="Расчитать"
-            Foreground="White"
-            Background="{DynamicResource AccentColorBrush2}"
-            Margin="30,10"
-            Height="40"
-            FontSize="16"
-            Command="{Binding GetPSGCommand}"
-            />
-        <ListBox 
-            BorderBrush="{DynamicResource AccentColorBrush}"
-            BorderThickness="2"
-            Margin="4"
-            Height="150"
-            ItemsSource="{Binding ResultRandList}"
-            />
+                <Button
+                    Content="Расчитать"
+                    Foreground="White"
+                    Background="{DynamicResource AccentColorBrush2}"
+                    Margin="20,5"
+                    Height="40"
+                    FontSize="16"
+                    Command="{Binding GetPSGCommand}" />
+                <Button
+                    Content="Очистить"
+                    Foreground="White"
+                    Background="{DynamicResource AccentColorBrush2}"
+                    Margin="20,5"
+                    Height="40"
+                    FontSize="16"
+                    Command="{Binding СleanListCommand}" />
+            </StackPanel>
+            <ListBox
+                Width="200"
+                Grid.Column="1"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                BorderThickness="2"
+                Margin="4"
+                Height="150"
+                VirtualizingPanel.IsVirtualizing="True"
+                VirtualizingPanel.CacheLength="1"
+                VirtualizingPanel.CacheLengthUnit="Page"
+                ItemsSource="{Binding ResultRandList}" />
+        </Grid>
     </StackPanel>
 </control:MetroWindow>
