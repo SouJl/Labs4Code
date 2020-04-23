@@ -20,9 +20,12 @@ namespace Labs4Code.ViewModel
 
         public HashLabModel MD5HashLab { get; set; }
 
+
+        public RSACodeModel RSALab { get; set; }
+
         public MainViewModel()
         {
-
+            RSALab = new RSACodeModel();
         }
 
         public ICommand OpenLab1Command

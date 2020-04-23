@@ -63,6 +63,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -88,6 +89,7 @@
     <Compile Include="Model\BlockEncrypteModel.cs" />
     <Compile Include="Model\CesarCodeModel.cs" />
     <Compile Include="Model\HashLabModel.cs" />
+    <Compile Include="Model\RSACodeModel.cs" />
     <Compile Include="Model\VernanCodeModel.cs" />
     <Compile Include="Static\RelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
