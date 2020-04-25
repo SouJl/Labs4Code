@@ -1,0 +1,215 @@
+﻿<control:MetroWindow
+    x:Class="Labs4Code.View.Lab4Window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    ResizeMode="CanResize"
+    WindowStartupLocation="CenterScreen"
+    ShowIconOnTitleBar="True"
+    SizeToContent="WidthAndHeight"
+    FontSize="18"
+    Title="Лабораторная №4">
+    
+    <Grid
+        DataContext="{Binding RSALab}">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+            Grid.Column="0">
+            
+            <Label 
+                Content="Входной текст:"/>
+            <TextBox 
+                FontSize="18"
+                Margin="5"
+                Width="250"
+                MinHeight="100"
+                MaxHeight="200"
+                Text="{Binding TextIn}"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                TextWrapping="Wrap"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                BorderThickness="2"
+                VerticalScrollBarVisibility="Auto"/>
+            
+            <Button 
+                Background="{DynamicResource AccentColorBrush}"
+                Content="Кодирование"
+                Foreground="White"
+                FontSize="16"
+                Margin="20,5"
+                Command="{Binding EncodeCommand}"
+                />
+
+            <Label 
+                Content="Выходная последовательность"/>
+            <ListBox
+                Margin="5"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                BorderThickness="2"
+                HorizontalContentAlignment="Left"
+                ScrollViewer.CanContentScroll="True"
+                ItemsSource="{Binding EncodeResult}"
+                MinHeight="100"
+                MaxHeight="100"
+                Width="250"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel
+                            Orientation="Horizontal"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <Button
+                Background="{DynamicResource AccentColorBrush}"
+                Content="Декодирование"
+                Foreground="White"
+                FontSize="16"
+                Margin="20,5"
+                Command="{Binding DecodeCommand}"/>
+            
+            <Label
+                Content="Декодированный текст:" />
+            <TextBox
+                Margin="5"
+                Width="250"
+                TextWrapping="Wrap"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                MinHeight="100"
+                MaxHeight="200"
+                Text="{Binding TextOut}"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                BorderThickness="2"
+                VerticalScrollBarVisibility="Auto" />
+        </StackPanel>
+        
+        <StackPanel
+            Grid.Column="1">
+            <Label 
+                Content="Расчет параметров"
+                />
+            
+            <Border
+                Margin="5"
+                BorderBrush="{DynamicResource AccentColorBrush2}"
+                BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="3"
+                        Text="p ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="0"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding P_Parameter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        Margin="3"
+                        Grid.Row="0"
+                        Grid.Column="1" />
+
+                    <TextBlock
+                        Margin="3"
+                        Text="q ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding Q_Parameter, Mode=OneWay}"
+                        Margin="3"
+                        FontSize="16"
+                        TextAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="1" />
+
+                    <TextBlock
+                        Margin="3"
+                        Text="N ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="2"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding N_Parameter, Mode=OneWay}"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        Margin="3"
+                        Grid.Row="2"
+                        Grid.Column="1" />
+
+                    <TextBlock
+                        Margin="3"
+                        Text="M ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="3"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding M_Parameter, Mode=OneWay}"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        Margin="3"
+                        Grid.Row="3"
+                        Grid.Column="1" />
+
+                    <TextBlock
+                        Margin="3"
+                        Text="D ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="4"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding D_Parameter, Mode=OneWay}"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        Margin="3"
+                        Grid.Row="4"
+                        Grid.Column="1" />
+
+                    <TextBlock
+                        Margin="3"
+                        Text="E ->"
+                        HorizontalAlignment="Center"
+                        Grid.Row="5"
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding E_Parameter, Mode=OneWay}"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        Margin="3"
+                        Grid.Row="5"
+                        Grid.Column="1" />
+                </Grid>
+            </Border>
+
+            <Button
+                Command="{Binding CalculateParamsValueCommand}"
+                Margin="10"
+                Background="{DynamicResource AccentColorBrush}"
+                Foreground="White"
+                FontSize="16"
+                Content="Расчитать"
+                />
+        </StackPanel>
+    </Grid>
+    
+</control:MetroWindow>

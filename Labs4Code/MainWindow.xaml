@@ -42,5 +42,16 @@
             MinHeight="40"
             Command="{Binding OpenLab3Command}"
             Margin="20,5" />
+        <Button
+            Content="Лабораторная 4"
+            Foreground="White"
+            FontSize="14"
+            Background="{DynamicResource AccentColorBrush}"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            MinHeight="40"
+            Command="{Binding OpenLab4Command}"
+            Margin="20,5" />
+
     </StackPanel>
 </Controls:MetroWindow>

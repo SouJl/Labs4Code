@@ -25,7 +25,7 @@ namespace Labs4Code.ViewModel
 
         public MainViewModel()
         {
-            RSALab = new RSACodeModel();
+
         }
 
         public ICommand OpenLab1Command
@@ -77,5 +77,21 @@ namespace Labs4Code.ViewModel
             }
         }
 
+        public ICommand OpenLab4Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    RSALab = new RSACodeModel();
+
+                    var openwindow = new Lab4Window()
+                    {
+                        DataContext = this,
+                    };
+                    openwindow.ShowDialog();
+                });
+            }
+        }
     }
 }

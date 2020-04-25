@@ -102,6 +102,9 @@
     <Compile Include="View\Lab3Window.xaml.cs">
       <DependentUpon>Lab3Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Lab4Window.xaml.cs">
+      <DependentUpon>Lab4Window.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Lab3Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lab4Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

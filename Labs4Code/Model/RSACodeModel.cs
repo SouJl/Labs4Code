@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Caliburn.Micro;
+using Labs4Code.Static;
 
 namespace Labs4Code.Model
 {
@@ -44,36 +47,160 @@ namespace Labs4Code.Model
             }
         }
 
-        public int P_Parameter { get; set; }
-        public int Q_Parameter { get; set; }
 
-        public int N_Parameter { get; set; }
-        public int M_Parameter { get; set; }
+        private ObservableCollection<string> _encodeResult;
 
-        public int D_Parameter { get; set; }
-        public int E_Parameter { get; set; }
+        public ObservableCollection<string> EncodeResult 
+        {
+            get => _encodeResult;
+            set
+            {
+                if (_encodeResult != value)
+                {
+                    _encodeResult = value;
+                    NotifyOfPropertyChange(() => EncodeResult);
+                }
+            }
+        }
+
+
+        private int _p_Parametr;
+        public int P_Parameter 
+        {
+            get => _p_Parametr;
+            set
+            {
+                if (_p_Parametr != value)
+                {
+                    _p_Parametr = value;
+                    NotifyOfPropertyChange(() => P_Parameter);
+                }
+            }
+        }
+
+        private int _q_Parametr;
+
+        public int Q_Parameter 
+        {
+            get => _q_Parametr;
+            set
+            {
+                if (_q_Parametr != value)
+                {
+                    _q_Parametr = value;
+                    NotifyOfPropertyChange(() => Q_Parameter);
+                }
+            }
+        }
+
+        private int _n_Parametr;
+        public int N_Parameter
+        {
+            get => _n_Parametr;
+            set
+            {
+                if (_n_Parametr != value)
+                {
+                    _n_Parametr = value;
+                    NotifyOfPropertyChange(() => N_Parameter);
+                }
+            }
+        }
+        private int _m_Parametr;
+        public int M_Parameter
+        {
+            get => _m_Parametr;
+            set
+            {
+                if (_m_Parametr != value)
+                {
+                    _m_Parametr = value;
+                    NotifyOfPropertyChange(() => M_Parameter);
+                }
+            }
+        }
+        private int _d_Parametr;
+        public int D_Parameter
+        {
+            get => _d_Parametr;
+            set
+            {
+                if (_d_Parametr != value)
+                {
+                    _d_Parametr = value;
+                    NotifyOfPropertyChange(() => D_Parameter);
+                }
+            }
+        }
+        private int _e_Parametr;
+        public int E_Parameter
+        {
+            get => _e_Parametr;
+            set
+            {
+                if (_e_Parametr != value)
+                {
+                    _e_Parametr = value;
+                    NotifyOfPropertyChange(() => E_Parameter);
+                }
+            }
+        }
+
 
         public Random Rand { get; set; }
 
 
         public RSACodeModel()
         {
-            CalculateParams();
+            //CalculateParams();
             
-            List<byte> encodeData = new List<byte>();
+           /* List<byte> encodeData = new List<byte>();
             
             encodeData.AddRange(Encoding.Unicode.GetBytes("Как дела?"));
-            
-            List<string> encodeResult = Encode(encodeData, E_Parameter, N_Parameter);
 
-            string decodeResult = Decode(encodeResult, D_Parameter, N_Parameter);
+            EncodeResult = Encode(encodeData, E_Parameter, N_Parameter);
+
+            string decodeResult = Decode(EncodeResult, D_Parameter, N_Parameter);*/
+        }
 
 
-        } 
-
-        public List<string> Encode(List<byte> data, int e_value, int n_value)
+        public ICommand CalculateParamsValueCommand
         {
-            List<string> result = new List<string>();
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    CalculateParams();
+                });
+            }
+        }
+
+        public ICommand EncodeCommand
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    List<byte> encodeData = new List<byte>();
+                    encodeData.AddRange(Encoding.Unicode.GetBytes(TextIn));
+                    EncodeResult = Encode(encodeData, E_Parameter, N_Parameter);
+                });
+            }
+        }
+
+        public ICommand DecodeCommand
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    TextOut = Decode(EncodeResult, D_Parameter, N_Parameter); 
+                });
+            }
+        }
+        public ObservableCollection<string> Encode(List<byte> data, int e_value, int n_value)
+        {
+            ObservableCollection<string> result = new ObservableCollection<string>();
             
             BigInteger bi;
 
@@ -91,7 +218,7 @@ namespace Labs4Code.Model
             return result;
         }
 
-        private string Decode(List<string> data, int d, int n)
+        private string Decode(ObservableCollection<string> data, int d, int n)
         {           
             List<byte> decodeData = new List<byte>();
             
