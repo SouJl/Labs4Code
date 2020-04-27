@@ -23,9 +23,12 @@ namespace Labs4Code.ViewModel
 
         public RSACodeModel RSALab { get; set; }
 
+
+        public ShenksLabModel ShenksLab { get; set; }
+
         public MainViewModel()
         {
-
+            ShenksLab = new ShenksLabModel();
         }
 
         public ICommand OpenLab1Command

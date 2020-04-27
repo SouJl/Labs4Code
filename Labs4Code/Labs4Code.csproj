@@ -90,6 +90,7 @@
     <Compile Include="Model\CesarCodeModel.cs" />
     <Compile Include="Model\HashLabModel.cs" />
     <Compile Include="Model\RSACodeModel.cs" />
+    <Compile Include="Model\ShenksLabModel.cs" />
     <Compile Include="Model\VernanCodeModel.cs" />
     <Compile Include="Static\RelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
