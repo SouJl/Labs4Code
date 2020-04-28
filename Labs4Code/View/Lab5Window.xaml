@@ -1,0 +1,16 @@
+﻿<Controls:MetroWindow
+    x:Class="Labs4Code.View.Lab5Window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    WindowStartupLocation="CenterScreen"
+    ShowIconOnTitleBar="True"
+    SizeToContent="WidthAndHeight">
+    <Grid>
+        <Image
+            Source="/Resources/404.jpg"
+            Stretch="Fill"
+            Width="500"
+            Height="400"/>
+    </Grid>
+</Controls:MetroWindow>

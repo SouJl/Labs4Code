@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Caliburn.Micro;
 
 namespace Labs4Code.ViewModel
 {
-    class MainViewModel
+    public class MainViewModel : PropertyChangedBase
     {
+
         public CesarCodeModel CesarKrypt { get; set; }
 
         public VernanCodeModel VernamCrypt { get; set; }
@@ -26,9 +28,34 @@ namespace Labs4Code.ViewModel
 
         public ShenksLabModel ShenksLab { get; set; }
 
+
+        private bool _isVisible = true;
+        /// <summary>
+        /// Отображение главного окна.
+        /// </summary>
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible != value)
+                {
+                    _isVisible = value;
+                    NotifyOfPropertyChange(() => IsVisible);
+                }
+            }
+        }
+
+        private CesarWindow Lab1Window { get; set; }
+        private Lab2Window Lab2Window { get; set; }
+        private Lab3Window Lab3Window { get; set; }
+        private Lab4Window Lab4Window { get; set; }
+
+        private Lab5Window Lab5Window { get; set; }
+
         public MainViewModel()
         {
-            ShenksLab = new ShenksLabModel();
+  
         }
 
         public ICommand OpenLab1Command
@@ -37,12 +64,12 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    Lab1Window = new CesarWindow();
+                    Lab1Window.Closed += HiddenWindowEvent;
                     CesarKrypt = new CesarCodeModel();
-                    var openwindow = new CesarWindow()
-                    {
-                        DataContext = this,
-                    };
-                    openwindow.ShowDialog();
+                    Lab1Window.DataContext = this;
+                    IsVisible = false;
+                    Lab1Window.ShowDialog();
                 });
             }
         }
@@ -52,13 +79,13 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    Lab2Window = new Lab2Window();
+                    Lab2Window.Closed += HiddenWindowEvent;
                     VernamCrypt = new VernanCodeModel();
                     DesCrypt = new BlockEncrypteModel();
-                    var openwindow = new Lab2Window()
-                    {
-                        DataContext = this,
-                    };
-                    openwindow.ShowDialog();
+                    Lab2Window.DataContext = this;
+                    IsVisible = false;
+                    Lab2Window.ShowDialog();
                 });
             }
         }
@@ -69,13 +96,12 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    Lab3Window = new Lab3Window();
+                    Lab3Window.Closed += HiddenWindowEvent;
                     MD5HashLab = new HashLabModel();
-
-                    var openwindow = new Lab3Window()
-                    {
-                        DataContext = this,
-                    };
-                    openwindow.ShowDialog();
+                    Lab3Window.DataContext = this;
+                    IsVisible = false;
+                    Lab3Window.ShowDialog();
                 });
             }
         }
@@ -86,15 +112,50 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    Lab4Window = new Lab4Window();
+                    Lab4Window.Closed += HiddenWindowEvent;
                     RSALab = new RSACodeModel();
-
-                    var openwindow = new Lab4Window()
-                    {
-                        DataContext = this,
-                    };
-                    openwindow.ShowDialog();
+                    Lab4Window.DataContext = this;
+                    IsVisible = false;
+                    Lab4Window.ShowDialog();
                 });
             }
         }
+
+        public ICommand OpenLab5Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    Lab5Window = new Lab5Window();
+                    Lab5Window.Closed += HiddenWindowEvent;
+                    IsVisible = false;
+                    Lab5Window.ShowDialog();
+                });
+            }
+        }
+
+
+        public ICommand OpenLab6Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    ShenksLab = new ShenksLabModel();
+                    /*Lab4Window.DataContext = this;
+                    IsVisible = false;
+                    Lab4Window.ShowDialog();*/
+                });
+            }
+        }
+
+
+        public void HiddenWindowEvent(object sender, EventArgs e)
+        {
+            IsVisible = true;
+        }
+
     }
 }

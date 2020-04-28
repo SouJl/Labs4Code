@@ -12,7 +12,7 @@ using Microsoft.Win32;
 
 namespace Labs4Code.Model
 {
-    class CesarCodeModel: PropertyChangedBase
+    public class CesarCodeModel: PropertyChangedBase
     {
         #region Алфавиты
 
