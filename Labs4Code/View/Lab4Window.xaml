@@ -15,6 +15,8 @@
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition 
+                Width="auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -27,26 +29,201 @@
                 FontSize="18"
                 Margin="5"
                 Width="250"
-                MinHeight="100"
-                MaxHeight="200"
+                Height="110"
                 Text="{Binding TextIn}"
                 BorderBrush="{DynamicResource AccentColorBrush}"
                 TextWrapping="Wrap"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 BorderThickness="2"
                 VerticalScrollBarVisibility="Auto"/>
-            
-            <Button 
+
+            <Button
                 Background="{DynamicResource AccentColorBrush}"
                 Content="Кодирование"
                 Foreground="White"
                 FontSize="16"
-                Margin="20,5"
-                Command="{Binding EncodeCommand}"
-                />
+                Margin="20,10"
+                Command="{Binding EncodeCommand}" />
 
+
+            <Button
+                Background="{DynamicResource AccentColorBrush}"
+                Content="Декодирование"
+                Foreground="White"
+                FontSize="16"
+                Margin="20,5"
+                Command="{Binding DecodeCommand}" />
+
+            <Label
+                Content="Декодированный текст:" />
+            <TextBox
+                Margin="5"
+                Width="250"
+                FontSize="18"
+                TextWrapping="Wrap"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Height="110"
+                Text="{Binding TextOut}"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                BorderThickness="2"
+                VerticalScrollBarVisibility="Auto" />
+        </StackPanel>
+
+        <Separator
+            Grid.Row="0"
+            Grid.Column="1"
+            Background="{DynamicResource AccentBaseColorBrush}"
+            Margin="10">
+            <Separator.LayoutTransform>
+                <RotateTransform
+                    Angle="90" />
+            </Separator.LayoutTransform>
+        </Separator>
+        
+        <StackPanel
+            Grid.Column="2">
             <Label 
-                Content="Выходная последовательность"/>
+                Content="Расчет параметров"
+                HorizontalAlignment="Center"
+                />
+            
+            <Border
+                Margin="5"
+                BorderBrush="{DynamicResource AccentBaseColorBrush}"
+                BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid
+                        Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Margin="3"
+                            Text="p ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding P_Parameter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Margin="3"
+                            Width="50"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Margin="3"
+                            Text="q ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding Q_Parameter, Mode=OneWay}"
+                            Margin="3"
+                            FontSize="16"
+                            Width="50"
+                            TextAlignment="Center"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Margin="3"
+                            Text="N ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="2"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding N_Parameter, Mode=OneWay}"
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Margin="3"
+                            Width="50"
+                            Grid.Row="2"
+                            Grid.Column="1" />
+                    </Grid>
+                    
+                    <Grid
+                        Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Margin="3"
+                            Text="M ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding M_Parameter, Mode=OneWay}"
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Margin="3"
+                            Width="50"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Margin="3"
+                            Text="D ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding D_Parameter, Mode=OneWay}"
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Margin="3"
+                            Width="50"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+
+                        <TextBlock
+                            Margin="3"
+                            Text="E ->"
+                            HorizontalAlignment="Center"
+                            Grid.Row="2"
+                            Grid.Column="0" />
+                        <TextBox
+                            Text="{Binding E_Parameter, Mode=OneWay}"
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Width="50"
+                            Margin="3"
+                            Grid.Row="2"
+                            Grid.Column="1" />
+                    </Grid>
+                </Grid>
+                
+            </Border>
+
+            <Button
+                Command="{Binding CalculateParamsValueCommand}"
+                Margin="10"
+                Background="{DynamicResource AccentColorBrush}"
+                Foreground="White"
+                FontSize="16"
+                Content="Расчитать"
+                />
+            <Label
+                Content="Выходная последовательность" />
             <ListBox
                 Margin="5"
                 BorderBrush="{DynamicResource AccentColorBrush}"
@@ -54,8 +231,7 @@
                 HorizontalContentAlignment="Left"
                 ScrollViewer.CanContentScroll="True"
                 ItemsSource="{Binding EncodeResult}"
-                MinHeight="100"
-                MaxHeight="100"
+                Height="155"
                 Width="250"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -68,147 +244,6 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-
-            <Button
-                Background="{DynamicResource AccentColorBrush}"
-                Content="Декодирование"
-                Foreground="White"
-                FontSize="16"
-                Margin="20,5"
-                Command="{Binding DecodeCommand}"/>
-            
-            <Label
-                Content="Декодированный текст:" />
-            <TextBox
-                Margin="5"
-                Width="250"
-                TextWrapping="Wrap"
-                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                MinHeight="100"
-                MaxHeight="200"
-                Text="{Binding TextOut}"
-                BorderBrush="{DynamicResource AccentColorBrush}"
-                BorderThickness="2"
-                VerticalScrollBarVisibility="Auto" />
-        </StackPanel>
-        
-        <StackPanel
-            Grid.Column="1">
-            <Label 
-                Content="Расчет параметров"
-                />
-            
-            <Border
-                Margin="5"
-                BorderBrush="{DynamicResource AccentColorBrush2}"
-                BorderThickness="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Margin="3"
-                        Text="p ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="0"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding P_Parameter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextAlignment="Center"
-                        FontSize="16"
-                        Margin="3"
-                        Grid.Row="0"
-                        Grid.Column="1" />
-
-                    <TextBlock
-                        Margin="3"
-                        Text="q ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="1"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding Q_Parameter, Mode=OneWay}"
-                        Margin="3"
-                        FontSize="16"
-                        TextAlignment="Center"
-                        Grid.Row="1"
-                        Grid.Column="1" />
-
-                    <TextBlock
-                        Margin="3"
-                        Text="N ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="2"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding N_Parameter, Mode=OneWay}"
-                        TextAlignment="Center"
-                        FontSize="16"
-                        Margin="3"
-                        Grid.Row="2"
-                        Grid.Column="1" />
-
-                    <TextBlock
-                        Margin="3"
-                        Text="M ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="3"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding M_Parameter, Mode=OneWay}"
-                        TextAlignment="Center"
-                        FontSize="16"
-                        Margin="3"
-                        Grid.Row="3"
-                        Grid.Column="1" />
-
-                    <TextBlock
-                        Margin="3"
-                        Text="D ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="4"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding D_Parameter, Mode=OneWay}"
-                        TextAlignment="Center"
-                        FontSize="16"
-                        Margin="3"
-                        Grid.Row="4"
-                        Grid.Column="1" />
-
-                    <TextBlock
-                        Margin="3"
-                        Text="E ->"
-                        HorizontalAlignment="Center"
-                        Grid.Row="5"
-                        Grid.Column="0" />
-                    <TextBox
-                        Text="{Binding E_Parameter, Mode=OneWay}"
-                        TextAlignment="Center"
-                        FontSize="16"
-                        Margin="3"
-                        Grid.Row="5"
-                        Grid.Column="1" />
-                </Grid>
-            </Border>
-
-            <Button
-                Command="{Binding CalculateParamsValueCommand}"
-                Margin="10"
-                Background="{DynamicResource AccentColorBrush}"
-                Foreground="White"
-                FontSize="16"
-                Content="Расчитать"
-                />
         </StackPanel>
     </Grid>
     

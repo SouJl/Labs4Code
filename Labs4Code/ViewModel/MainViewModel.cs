@@ -50,8 +50,8 @@ namespace Labs4Code.ViewModel
         private Lab2Window Lab2Window { get; set; }
         private Lab3Window Lab3Window { get; set; }
         private Lab4Window Lab4Window { get; set; }
-
         private Lab5Window Lab5Window { get; set; }
+        private Lab6Window Lab6Window { get; set; }
 
         public MainViewModel()
         {
@@ -143,10 +143,12 @@ namespace Labs4Code.ViewModel
             {
                 return new RelayCommand(sender =>
                 {
+                    Lab6Window = new Lab6Window();
+                    Lab6Window.Closed += HiddenWindowEvent;
                     ShenksLab = new ShenksLabModel();
-                    /*Lab4Window.DataContext = this;
+                    Lab6Window.DataContext = this;
                     IsVisible = false;
-                    Lab4Window.ShowDialog();*/
+                    Lab6Window.ShowDialog();
                 });
             }
         }

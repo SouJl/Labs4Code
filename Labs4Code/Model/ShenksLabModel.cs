@@ -16,8 +16,8 @@ namespace Labs4Code.Model
 
         #region Входные данные (y,a,p)
 
-        private string _y_inValue;
-        public string Y_inValue
+        private int _y_inValue = 0;
+        public int Y_inValue
         {
             get => _y_inValue;
             set
@@ -30,8 +30,8 @@ namespace Labs4Code.Model
             }
         }
 
-        private string _a_inValue;
-        public string A_inValue
+        private int _a_inValue = 0;
+        public int A_inValue
         {
             get => _a_inValue;
             set
@@ -44,8 +44,8 @@ namespace Labs4Code.Model
             }
         }
 
-        private string _p_inValue;
-        public string P_inValue
+        private int _p_inValue;
+        public int P_inValue
         {
             get => _p_inValue;
             set
@@ -62,7 +62,7 @@ namespace Labs4Code.Model
 
         #region Выходные данные (x)
 
-        private int _x_outValue;
+        private int _x_outValue = 0;
         public int X_outValue
         {
             get => _x_outValue;
@@ -76,11 +76,26 @@ namespace Labs4Code.Model
             }
         }
 
+
+        private int _x_OvershootoutValue = 0;
+        public int X_OvershootoutValue
+        {
+            get => _x_OvershootoutValue;
+            set
+            {
+                if (_x_OvershootoutValue != value)
+                {
+                    _x_OvershootoutValue = value;
+                    NotifyOfPropertyChange(() => X_OvershootoutValue);
+                }
+            }
+        }
+
         #endregion
-        
+
         #region Промежуточные вычисления 
 
-        private int _m_Parametr;
+        private int _m_Parametr = 0;
         public int M_Parameter
         {
             get => _m_Parametr;
@@ -94,7 +109,7 @@ namespace Labs4Code.Model
             }
         }
 
-        private int _k_Parametr;
+        private int _k_Parametr = 0;
         public int K_Parameter
         {
             get => _k_Parametr;
@@ -108,9 +123,9 @@ namespace Labs4Code.Model
             }
         }
 
-        private ObservableCollection<string> _firstRange;
+        private ObservableCollection<int> _firstRange;
 
-        public ObservableCollection<string> FirstRange
+        public ObservableCollection<int> FirstRange
         {
             get => _firstRange;
             set
@@ -123,9 +138,9 @@ namespace Labs4Code.Model
             }
         }
 
-        private ObservableCollection<string> _secondRange;
+        private ObservableCollection<int> _secondRange;
 
-        public ObservableCollection<string> SecondRange
+        public ObservableCollection<int> SecondRange
         {
             get => _secondRange;
             set
@@ -138,6 +153,51 @@ namespace Labs4Code.Model
             }
         }
 
+        private int _i_Parametr = 0;
+        public int I_Parameter
+        {
+            get => _i_Parametr;
+            set
+            {
+                if (_i_Parametr != value)
+                {
+                    _i_Parametr = value;
+                    NotifyOfPropertyChange(() => I_Parameter);
+                }
+            }
+        }
+
+        private int _j_Parametr = 0;
+        public int J_Parameter
+        {
+            get => _j_Parametr;
+            set
+            {
+                if (_j_Parametr != value)
+                {
+                    _j_Parametr = value;
+                    NotifyOfPropertyChange(() => J_Parameter);
+                }
+            }
+        }
+
+
+        private ObservableCollection<int> _i_Range;
+
+        public ObservableCollection<int> I_Range
+        {
+            get => _i_Range;
+            set
+            {
+                if (_i_Range != value)
+                {
+                    _i_Range = value;
+                    NotifyOfPropertyChange(() => I_Range);
+                }
+            }
+        }
+
+
         #endregion
 
 
@@ -147,7 +207,7 @@ namespace Labs4Code.Model
 
         public ShenksLabModel()
         {
-            FullOvershoot(12, 13, 31);
+            //FullOvershoot(12, 13, 31);
         }
 
 
@@ -157,22 +217,69 @@ namespace Labs4Code.Model
             {
                 return new RelayCommand(sender =>
                 {
-                    /*y = (a^x)modp*/
+                    var parameter = (string)sender;
 
-                    int y_value = Convert.ToInt32(Y_inValue);
-                    int a_value = Convert.ToInt32(A_inValue);
-                    int p_value = Convert.ToInt32(P_inValue);
+                    switch (parameter)
+                    {
+                        case "Main":
+                            {
+                                /*y = (a^x)modp*/
 
-                    FirstStepSolve(p_value);
-                  
-                    SecondStepSolve(y_value, a_value, p_value);
-                    
-                    ThirdStepValue();
+                                FirstStepSolve(P_inValue);
 
+                                SecondStepSolve(Y_inValue, A_inValue, P_inValue);
+
+                                ThirdStepValue();
+                                break;
+                            }
+                        case "Overshoot":
+                            {
+                                /*Полный перебор*/
+                                I_Range = new ObservableCollection<int>();
+                                FullOvershoot(Y_inValue, A_inValue, P_inValue);
+                                break;
+                            }
+                    }
+ 
                 });
             }
         }
 
+
+        public ICommand CleanCommand
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+
+                    var parameter = (string)sender;
+
+                    switch (parameter)
+                    {
+                        case "Main":
+                            {
+                                //Y_inValue = A_inValue = P_inValue = 0;
+                                K_Parameter = M_Parameter = 0;
+                                FirstRange.Clear();
+                                SecondRange.Clear();
+                                I_Parameter = J_Parameter = 0;
+                                X_outValue = 0;
+                                break;
+                            }
+                        case "Overshoot":
+                            {
+                                //Y_inValue = A_inValue = P_inValue = 0;
+                                I_Range.Clear();
+                                X_OvershootoutValue = 0;
+                                break;
+                            }
+                    }
+
+
+                });
+            }
+        }
 
         private void FirstStepSolve(int p_value) 
         {
@@ -184,22 +291,22 @@ namespace Labs4Code.Model
 
         private void SecondStepSolve(int y_value, int a_value, int p_value)
         {
-            FirstRange = new ObservableCollection<string>();
+            FirstRange = new ObservableCollection<int>();
 
-            SecondRange = new ObservableCollection<string>();
+            SecondRange = new ObservableCollection<int>();
 
             for (int i =0; i <= M_Parameter - 1; i++)
             {
                 BigInteger new_y_value = new BigInteger(y_value);
                 BigInteger new_p_value = new BigInteger(p_value);
                 int result = (int)(BigInteger.Pow(a_value, i) * new_y_value % new_p_value);
-                FirstRange.Add(result.ToString());
+                FirstRange.Add(result);
             }
             for (int i = 1; i <= K_Parameter - 1; i++)
             {
                 BigInteger new_p_value = new BigInteger(p_value);
                 int result = (int)(BigInteger.Pow(a_value, i * M_Parameter) % new_p_value);
-                SecondRange.Add(result.ToString());
+                SecondRange.Add(result);
             }
         }
 
@@ -217,8 +324,11 @@ namespace Labs4Code.Model
                 }
                 j++;
             }
-
-            X_outValue = j * M_Parameter - i;
+            
+            I_Parameter = i;
+            J_Parameter = j;
+            
+            X_outValue = J_Parameter * M_Parameter - I_Parameter;
         }
 
 
@@ -229,9 +339,10 @@ namespace Labs4Code.Model
             {
                 BigInteger new_p_value = new BigInteger(p_value);
                 int result = (int)(BigInteger.Pow(a_value, i) % new_p_value);
+                I_Range.Add(i);
                 if (result == y_value) break;
             }
-            X_outValue = i;
+            X_OvershootoutValue = i;
         }
 
     }
