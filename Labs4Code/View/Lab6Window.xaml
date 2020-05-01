@@ -450,7 +450,7 @@
                         <ItemsPanelTemplate>
                             <WrapPanel
                                 Orientation="Horizontal"
-                                VerticalAlignment="Center"
+                                VerticalAlignment="Top"
                                 HorizontalAlignment="Left" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
