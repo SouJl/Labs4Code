@@ -25,8 +25,9 @@ namespace Labs4Code.ViewModel
 
         public RSACodeModel RSALab { get; set; }
 
-
         public ShenksLabModel ShenksLab { get; set; }
+
+        public BiCoinNonceModel BitNonceLAb { get; set; }
 
 
         private bool _isVisible = true;
@@ -52,10 +53,11 @@ namespace Labs4Code.ViewModel
         private Lab4Window Lab4Window { get; set; }
         private Lab5Window Lab5Window { get; set; }
         private Lab6Window Lab6Window { get; set; }
+        private Lab7Window Lab7Window { get; set; }
 
         public MainViewModel()
         {
-  
+
         }
 
         public ICommand OpenLab1Command
@@ -153,6 +155,21 @@ namespace Labs4Code.ViewModel
             }
         }
 
+        public ICommand OpenLab7Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    Lab7Window = new Lab7Window();
+                    Lab7Window.Closed += HiddenWindowEvent;
+                    BitNonceLAb = new BiCoinNonceModel();
+                    Lab7Window.DataContext = this;
+                    IsVisible = false;
+                    Lab7Window.ShowDialog();
+                });
+            }
+        }
 
         public void HiddenWindowEvent(object sender, EventArgs e)
         {

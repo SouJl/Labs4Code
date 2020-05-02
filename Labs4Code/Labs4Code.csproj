@@ -90,6 +90,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\BoolToVisibleConvert.cs" />
+    <Compile Include="Model\BiCoinNonceModel.cs" />
     <Compile Include="Model\BlockEncrypteModel.cs" />
     <Compile Include="Model\CesarCodeModel.cs" />
     <Compile Include="Model\HashLabModel.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="View\Lab6Window.xaml.cs">
       <DependentUpon>Lab6Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lab7Window.xaml.cs">
+      <DependentUpon>Lab7Window.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Lab6Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Lab7Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
