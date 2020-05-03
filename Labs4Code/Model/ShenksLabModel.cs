@@ -312,23 +312,23 @@ namespace Labs4Code.Model
 
         private void ThirdStepValue()
         {
-            int i = 0;
-            int j = 1;
+            int i = 1;
+            int j = 0;
             
             foreach(var k_value in SecondRange)
             {
                 if (FirstRange.Contains(k_value))
                 {
-                    i = FirstRange.IndexOf(k_value);
+                    j = FirstRange.IndexOf(k_value);
                     break; 
                 }
-                j++;
+                i++;
             }
             
             I_Parameter = i;
             J_Parameter = j;
             
-            X_outValue = J_Parameter * M_Parameter - I_Parameter;
+            X_outValue = I_Parameter * M_Parameter - J_Parameter;
         }
 
 
