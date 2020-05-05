@@ -8,8 +8,7 @@
     WindowStartupLocation="CenterScreen"
     ShowIconOnTitleBar="True"
     SizeToContent="WidthAndHeight"
-    FontSize="18"
-    Title="Лабораторная №3">
+    FontSize="18">
     <StackPanel>
         <TextBlock
             Text="Генератор псевдо-случайных чисел"

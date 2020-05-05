@@ -48,12 +48,11 @@ namespace Labs4Code.Model
         }
 
 
-        public VernanCodeModel()
-        {
+        public VernanCodeModel() { }
 
-        }
-
-
+        /// <summary>
+        /// Команда генерацим ключа
+        /// </summary>
         public ICommand RandKeyCommand
         {
             get
@@ -67,6 +66,10 @@ namespace Labs4Code.Model
                 });
             }
         }
+
+        /// <summary>
+        /// Команда кодирования информации
+        /// </summary>
         public ICommand EncrypteCommand
         {
             get
@@ -78,6 +81,9 @@ namespace Labs4Code.Model
             }
         }
 
+        /// <summary>
+        /// Команда декодирования информации
+        /// </summary>
         public ICommand DecrypteCommand
         {
             get
@@ -89,6 +95,9 @@ namespace Labs4Code.Model
             }
         }
 
+        /// <summary>
+        /// Команда записи/чтения ключа из файла
+        /// </summary>
         public ICommand KeyFileCommand
         {
             get
@@ -123,7 +132,8 @@ namespace Labs4Code.Model
             }
         }
 
-        static string RandKey(string str)
+
+        private string RandKey(string str)
         {
             string result = null;
             Random rand = new Random();

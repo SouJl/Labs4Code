@@ -12,11 +12,14 @@ using Labs4Code.Static;
 
 namespace Labs4Code.Model
 {
-    public class BiCoinNonceModel : PropertyChangedBase
+    public class BitCoinNonceModel : PropertyChangedBase
     {
         #region Входные значения 
 
         private int _computeValue = 0;
+        /// <summary>
+        /// входное значения Value.
+        /// </summary>
         public int ComputeValue
         {
             get => _computeValue;
@@ -31,6 +34,9 @@ namespace Labs4Code.Model
         }
 
         private int _countOfZero = 0;
+        /// <summary>
+        /// Количество 0.
+        /// </summary>
         public int CountOfZero
         {
             get => _countOfZero;
@@ -49,6 +55,9 @@ namespace Labs4Code.Model
         #region Выходные значения 
 
         private int _nonce = 0;
+        /// <summary>
+        /// Подобранные NONCE.
+        /// </summary>
         public int Nonce
         {
             get => _nonce;
@@ -63,6 +72,9 @@ namespace Labs4Code.Model
         }
 
         private string _textOut;
+        /// <summary>
+        /// Последний хэш с заданым числом 0.
+        /// </summary>
         public string TextOut
         {
             get => _textOut;
@@ -77,7 +89,9 @@ namespace Labs4Code.Model
         }
 
         private ObservableCollection<string> _hashResultCollection;
-
+        /// <summary>
+        /// Колекция вычисленных хэшей.
+        /// </summary>
         public ObservableCollection<string> HashResultCollection
         {
             get => _hashResultCollection;
@@ -93,16 +107,20 @@ namespace Labs4Code.Model
 
         #endregion
 
+        /// <summary>
+        /// Алгоритм хэширования.
+        /// </summary>
         private SHA256 Hash { get; set; }
 
-
-        public BiCoinNonceModel()
+        public BitCoinNonceModel()
         {
             Hash = SHA256.Create();
             HashResultCollection = new ObservableCollection<string>();
         }
 
-
+        /// <summary>
+        /// Команда получения результата.
+        /// </summary>
         public ICommand GetResultCommand
         {
             get
@@ -114,11 +132,14 @@ namespace Labs4Code.Model
             }
         }
 
+        /// <summary>
+        /// Побор NONCE с заданным числом 0.
+        /// </summary>
         private void GetZeroHahResult()
         {
             bool endofHash = false;
             int nonce = 0;
-            string strAllbin = null;
+            string BinResultStr = null;
             while (!endofHash)
             {
                 int result = ComputeValue | nonce;
@@ -127,26 +148,26 @@ namespace Labs4Code.Model
                 for (int i = 0; i < hashResult.Length; i++)
                 {
                     string strBin = Convert.ToString(hashResult[i], 2);
-                    strBin = strBin.PadLeft(8, '0');  // Zero Pad
-                    strAllbin += strBin;
+                    strBin = strBin.PadLeft(8, '0'); 
+                    BinResultStr += strBin;
                 }
-                HashResultCollection.Add(strAllbin);
+                HashResultCollection.Add(BinResultStr);
                 int checkcount = 0;
                 int zeroPos;
                 for (zeroPos = 0; zeroPos < CountOfZero; zeroPos++)
                 {
-                    if (strAllbin[zeroPos] == '0') checkcount++;
+                    if (BinResultStr[zeroPos] == '0') checkcount++;
                 }
-                if (checkcount == CountOfZero && strAllbin[zeroPos + 1] == '1')
+                if (checkcount == CountOfZero && BinResultStr[zeroPos + 1] == '1')
                 {
                     endofHash = true;
                     Nonce = nonce;
-                    TextOut = strAllbin;
+                    TextOut = BinResultStr;
                 }
                 else
                 {
                     HashResultCollection.Add(" ");
-                    strAllbin = null;
+                    BinResultStr = null;
                     nonce++;
                 }
 

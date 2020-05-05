@@ -20,16 +20,12 @@
         </Grid.ColumnDefinitions>
         <DockPanel
             Grid.Column="0">
-            <TextBlock
-                Text="Список лабраторных работ" 
-                FontSize="24"
-                Margin="5"
-                DockPanel.Dock="Top"/>
             <Border
                 BorderBrush="{DynamicResource AccentColorBrush}"
                 BorderThickness="1"
-                Margin="5,0,0,0"
-                DockPanel.Dock="Top">
+                Margin="10"
+                DockPanel.Dock="Top"
+                Width="250">
                 <StackPanel
                     Margin="2">
                     <Button

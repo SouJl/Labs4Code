@@ -7,11 +7,21 @@
     WindowStartupLocation="CenterScreen"
     ShowIconOnTitleBar="True"
     SizeToContent="WidthAndHeight"
-    FontSize="18"
-    Title="Лабораторная №6">
+    FontSize="18">
 
     <StackPanel
         DataContext="{Binding ShenksLab}">
+        <TextBlock
+            Text="Дискретное логарифмирование"
+            TextWrapping="Wrap"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="5,5,0,2"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource AccentColorBrush}" />
+        <Separator
+            Background="{DynamicResource AccentColorBrush2}"
+            Margin="5,2" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

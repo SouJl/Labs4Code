@@ -13,23 +13,6 @@ namespace Labs4Code.ViewModel
 {
     public class MainViewModel : PropertyChangedBase
     {
-
-        public CesarCodeModel CesarKrypt { get; set; }
-
-        public VernanCodeModel VernamCrypt { get; set; }
-
-        public BlockEncrypteModel DesCrypt { get; set; }
-
-        public HashLabModel MD5HashLab { get; set; }
-
-
-        public RSACodeModel RSALab { get; set; }
-
-        public ShenksLabModel ShenksLab { get; set; }
-
-        public BiCoinNonceModel BitNonceLAb { get; set; }
-
-
         private bool _isVisible = true;
         /// <summary>
         /// Отображение главного окна.
@@ -47,6 +30,29 @@ namespace Labs4Code.ViewModel
             }
         }
 
+        #region Объявление моделей лабораторных работ
+
+        public CesarCodeModel CesarKrypt { get; set; }
+
+        public VernanCodeModel VernamCrypt { get; set; }
+
+        public BlockEncrypteModel DesCrypt { get; set; }
+
+        public HashLabModel MD5HashLab { get; set; }
+
+
+        public RSACodeModel RSALab { get; set; }
+
+        public ShenksLabModel ShenksLab { get; set; }
+
+        public BitCoinNonceModel BitNonceLAb { get; set; }
+        
+        public SteganographLabModel StenoGraphLab { get; set; }
+
+        #endregion
+
+        #region Объявление отображений лабораторных работ
+
         private CesarWindow Lab1Window { get; set; }
         private Lab2Window Lab2Window { get; set; }
         private Lab3Window Lab3Window { get; set; }
@@ -54,11 +60,13 @@ namespace Labs4Code.ViewModel
         private Lab5Window Lab5Window { get; set; }
         private Lab6Window Lab6Window { get; set; }
         private Lab7Window Lab7Window { get; set; }
+        private Lab8Window Lab8Window { get; set; }
 
-        public MainViewModel()
-        {
+        #endregion
+        
+        public MainViewModel() { }
 
-        }
+        #region Команды открытия окон лабораторных работ
 
         public ICommand OpenLab1Command
         {
@@ -163,7 +171,7 @@ namespace Labs4Code.ViewModel
                 {
                     Lab7Window = new Lab7Window();
                     Lab7Window.Closed += HiddenWindowEvent;
-                    BitNonceLAb = new BiCoinNonceModel();
+                    BitNonceLAb = new BitCoinNonceModel();
                     Lab7Window.DataContext = this;
                     IsVisible = false;
                     Lab7Window.ShowDialog();
@@ -171,6 +179,29 @@ namespace Labs4Code.ViewModel
             }
         }
 
+        public ICommand OpenLab8Command
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    Lab8Window = new Lab8Window();
+                    Lab8Window.Closed += HiddenWindowEvent;
+                    StenoGraphLab = new SteganographLabModel();
+                    Lab8Window.DataContext = this;
+                    IsVisible = false;
+                    Lab8Window.ShowDialog();
+                });
+            }
+        }
+
+        #endregion
+        
+        /// <summary>
+        /// Событие отображения главного окна.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void HiddenWindowEvent(object sender, EventArgs e)
         {
             IsVisible = true;

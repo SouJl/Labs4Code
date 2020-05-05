@@ -63,6 +63,9 @@ namespace Labs4Code.Model
         #region Выходные данные (x)
 
         private int _x_outValue = 0;
+        /// <summary>
+        /// Значение Х при методе "Шаг младенца - шаг великана"
+        /// </summary>
         public int X_outValue
         {
             get => _x_outValue;
@@ -78,6 +81,9 @@ namespace Labs4Code.Model
 
 
         private int _x_OvershootoutValue = 0;
+        /// <summary>
+        /// Значения Х при полном переборе
+        /// </summary>
         public int X_OvershootoutValue
         {
             get => _x_OvershootoutValue;
@@ -124,7 +130,9 @@ namespace Labs4Code.Model
         }
 
         private ObservableCollection<int> _firstRange;
-
+        /// <summary>
+        /// a^(m-1)*y
+        /// </summary>
         public ObservableCollection<int> FirstRange
         {
             get => _firstRange;
@@ -139,7 +147,9 @@ namespace Labs4Code.Model
         }
 
         private ObservableCollection<int> _secondRange;
-
+        /// <summary>
+        /// a^(km)
+        /// </summary>
         public ObservableCollection<int> SecondRange
         {
             get => _secondRange;
@@ -183,7 +193,9 @@ namespace Labs4Code.Model
 
 
         private ObservableCollection<int> _i_Range;
-
+        /// <summary>
+        /// Итерации вычисления Х (полные перебор)
+        /// </summary>
         public ObservableCollection<int> I_Range
         {
             get => _i_Range;
@@ -205,12 +217,11 @@ namespace Labs4Code.Model
         public Random Rand { get; set; }
 
 
-        public ShenksLabModel()
-        {
-            //FullOvershoot(12, 13, 31);
-        }
+        public ShenksLabModel() { }
 
-
+        /// <summary>
+        /// Команда получения значения X
+        /// </summary>
         public ICommand GetResultCommand
         {
             get
@@ -245,21 +256,20 @@ namespace Labs4Code.Model
             }
         }
 
-
+        /// <summary>
+        /// Команда обнуления вычислений
+        /// </summary>
         public ICommand CleanCommand
         {
             get
             {
                 return new RelayCommand(sender =>
                 {
-
                     var parameter = (string)sender;
-
                     switch (parameter)
                     {
                         case "Main":
                             {
-                                //Y_inValue = A_inValue = P_inValue = 0;
                                 K_Parameter = M_Parameter = 0;
                                 FirstRange.Clear();
                                 SecondRange.Clear();
@@ -269,14 +279,11 @@ namespace Labs4Code.Model
                             }
                         case "Overshoot":
                             {
-                                //Y_inValue = A_inValue = P_inValue = 0;
                                 I_Range.Clear();
                                 X_OvershootoutValue = 0;
                                 break;
                             }
                     }
-
-
                 });
             }
         }

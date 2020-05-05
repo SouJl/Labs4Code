@@ -1,0 +1,143 @@
+﻿<control:MetroWindow
+    x:Class="Labs4Code.View.Lab8Window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    ShowIconOnTitleBar="True"
+    SizeToContent="WidthAndHeight"
+    FontSize="18">
+    
+    <StackPanel
+        DataContext="{Binding StenoGraphLab}">
+        <TextBlock
+            Text="Стеганография. LSB-replacement"
+            TextWrapping="Wrap"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="5,5,0,2"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource AccentColorBrush}" />
+        <Separator
+            Background="{DynamicResource AccentColorBrush2}"
+            Margin="5,2" />
+        <Grid
+            Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition
+                    Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="0">
+                <Label 
+                    Content="Входные данные:"
+                    Margin="5"/>
+                <TextBox 
+                    Margin="5"
+                    Width="300"
+                    Height="120"
+                    TextAlignment="Justify"
+                    BorderBrush="{DynamicResource AccentColorBrush2}"
+                    Text="{Binding TextIn}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    TextWrapping="Wrap"
+                    FontSize="18"
+                    />
+                <Grid
+                    Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Content="Введите seed:" />
+                    <TextBox
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        Text="{Binding Seed}"
+                        Width="130"
+                        Height="30"
+                        FontSize="18"
+                        TextAlignment="Center"
+                        BorderBrush="{DynamicResource AccentColorBrush2}" />
+                </Grid>
+            </StackPanel>
+
+            <Separator
+                Grid.Row="0"
+                Grid.Column="1"
+                Background="{DynamicResource AccentBaseColorBrush}"
+                Margin="10,5">
+                <Separator.LayoutTransform>
+                    <RotateTransform
+                        Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+
+            <StackPanel
+                Grid.Column="2"
+                Width="250"
+                Margin="5">
+                <Button
+                    Background="{DynamicResource AccentBaseColorBrush}"
+                    Margin="10"
+                    Height="40"
+                    Content="Внедрить"
+                    FontSize="18"
+                    Foreground="White"
+                    Command="{Binding GetResultCommand}"
+                    CommandParameter="Insert" />
+                <Button
+                    Background="{DynamicResource AccentBaseColorBrush}"
+                    Margin="10"
+                    Height="40"
+                    Content="Извлечь"
+                    FontSize="18"
+                    Foreground="White"
+                    Command="{Binding GetResultCommand}"
+                    CommandParameter="Extract" />
+                <Label 
+                    Content="Путь к файлу:"
+                    Margin="10,10,10,7"/>
+                <TextBox
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Text="{Binding FilePath}"
+                    Width="230"
+                    Height="30"
+                    FontSize="18"
+                    Margin="10,5,10,5"
+                    TextAlignment="Center"
+                    BorderBrush="{DynamicResource AccentColorBrush2}" />
+            </StackPanel>
+        </Grid>
+
+        <Separator 
+            Background="{DynamicResource AccentBaseColorBrush}"
+            Margin="10,5"
+            />
+        <StackPanel
+            Margin="5">
+            <Label
+                Content="Извлеченный данные:"
+                Margin="5" />
+            <TextBox
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Text="{Binding TextOut}"
+                Height="120"
+                Width="580"
+                FontSize="18"
+                Margin="5"
+                TextWrapping="Wrap"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                BorderBrush="{DynamicResource AccentColorBrush2}" />
+        </StackPanel>
+    </StackPanel>
+</control:MetroWindow>

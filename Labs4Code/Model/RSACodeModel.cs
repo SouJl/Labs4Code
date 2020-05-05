@@ -49,7 +49,9 @@ namespace Labs4Code.Model
 
 
         private ObservableCollection<string> _encodeResult;
-
+        /// <summary>
+        /// Выходная последовательность чисел.
+        /// </summary>
         public ObservableCollection<string> EncodeResult 
         {
             get => _encodeResult;
@@ -63,6 +65,10 @@ namespace Labs4Code.Model
             }
         }
 
+
+        public Random Rand { get; set; }
+
+        #region Параметры RSA
 
         private int _p_Parametr;
         public int P_Parameter 
@@ -132,6 +138,7 @@ namespace Labs4Code.Model
                 }
             }
         }
+
         private int _e_Parametr;
         public int E_Parameter
         {
@@ -146,24 +153,16 @@ namespace Labs4Code.Model
             }
         }
 
-
-        public Random Rand { get; set; }
+        #endregion
 
 
         public RSACodeModel()
         {
-            //CalculateParams();
-            
-           /* List<byte> encodeData = new List<byte>();
-            
-            encodeData.AddRange(Encoding.Unicode.GetBytes("Как дела?"));
-
-            EncodeResult = Encode(encodeData, E_Parameter, N_Parameter);
-
-            string decodeResult = Decode(EncodeResult, D_Parameter, N_Parameter);*/
         }
 
-
+        /// <summary>
+        /// Команда вычисления параметров RSA
+        /// </summary>
         public ICommand CalculateParamsValueCommand
         {
             get
@@ -175,6 +174,9 @@ namespace Labs4Code.Model
             }
         }
 
+        /// <summary>
+        /// Команда кодирования информации
+        /// </summary>
         public ICommand EncodeCommand
         {
             get
@@ -188,6 +190,9 @@ namespace Labs4Code.Model
             }
         }
 
+        /// <summary>
+        /// Команда декодирвоания информации
+        /// </summary>
         public ICommand DecodeCommand
         {
             get
@@ -198,6 +203,14 @@ namespace Labs4Code.Model
                 });
             }
         }
+
+        /// <summary>
+        /// Метод кодирования входных данных
+        /// </summary>
+        /// <param name="data">кодируемые данные</param>
+        /// <param name="e_value">значение e</param>
+        /// <param name="n_value">значение n</param>
+        /// <returns>выходная последовательность</returns>
         public ObservableCollection<string> Encode(List<byte> data, int e_value, int n_value)
         {
             ObservableCollection<string> result = new ObservableCollection<string>();
@@ -209,15 +222,21 @@ namespace Labs4Code.Model
                 bi = new BigInteger(data[i]);
                 bi = BigInteger.Pow(bi, e_value);
 
-                BigInteger n_ = new BigInteger(n_value);
+                BigInteger N = new BigInteger(n_value);
 
-                bi = bi % n_;
+                bi = bi % N;
                 result.Add(bi.ToString());
             }
-
             return result;
         }
 
+        /// <summary>
+        /// Декодирование данных
+        /// </summary>
+        /// <param name="data">декодируемые данные</param>
+        /// <param name="d">значение d</param>
+        /// <param name="n">значение n</param>
+        /// <returns>полученная информация</returns>
         private string Decode(ObservableCollection<string> data, int d, int n)
         {           
             List<byte> decodeData = new List<byte>();
@@ -229,20 +248,21 @@ namespace Labs4Code.Model
                 bi = new BigInteger(Convert.ToDouble(item));
                 bi = BigInteger.Pow(bi, d);
 
-                BigInteger bi_n = new BigInteger(n);
+                BigInteger N = new BigInteger(n);
 
-                bi = bi % bi_n;
+                bi = bi % N;
 
                 decodeData.Add((byte)bi);
 
             }
-
-            string result = Encoding.Unicode.GetString(decodeData.ToArray());
-            return result;
+            return Encoding.Unicode.GetString(decodeData.ToArray());
         }
 
         #region Вычисления
 
+        /// <summary>
+        /// Расчет основных параметров
+        /// </summary>
         private void CalculateParams()
         {
             Rand = new Random();
@@ -261,6 +281,11 @@ namespace Labs4Code.Model
 
         }
 
+        /// <summary>
+        /// Проверка на взаимнопростые
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
         private bool IsTheNumberSimple(int parameter)
         {
             var result = true;
@@ -285,12 +310,17 @@ namespace Labs4Code.Model
 
         }
 
-        private int Calculate_D_Parameter(int invalue)
+        /// <summary>
+        ///  Нахождение параметра d
+        /// </summary>
+        /// <param name="m_value"></param>
+        /// <returns></returns>
+        private int Calculate_D_Parameter(int m_value)
         {
-            int result = invalue - 1;
-            for (long i = 2; i <= invalue; i++)
+            int result = m_value - 1;
+            for (long i = 2; i <= m_value; i++)
             {
-                if ((invalue % i == 0) && (result % i == 0))
+                if ((m_value % i == 0) && (result % i == 0))
                 {
                     result--;
                     i = 1;
@@ -299,10 +329,15 @@ namespace Labs4Code.Model
             return result;
         }
 
+        /// <summary>
+        /// Нахождение параметра e
+        /// </summary>
+        /// <param name="d_value"></param>
+        /// <param name="m_value"></param>
+        /// <returns></returns>
         private int Calculate_E_Parametr(int d_value, int m_value)
         {
             int result = 10;
-
             while (true)
             {
                 if ((result * d_value) % m_value == 1)

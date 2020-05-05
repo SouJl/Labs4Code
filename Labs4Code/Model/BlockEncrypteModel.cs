@@ -15,8 +15,6 @@ namespace Labs4Code.Model
     public class BlockEncrypteModel : PropertyChangedBase
     {
 
-       //private static string KetFilePath = "DESKey.txt";
-
         private bool _visibility;
         /// <summary>
         /// Отображения параметров ключа.
@@ -55,7 +53,6 @@ namespace Labs4Code.Model
         private List<byte> Key { get; set; }
 
         private DES DESshifr { get; set; }
-
 
         private List<byte> data { get; set; }
 
@@ -100,7 +97,6 @@ namespace Labs4Code.Model
                     data.Clear();
                     data.AddRange(Encrypte(Text, Key.ToArray(), DESshifr.IV));
                     Text = Encoding.Default.GetString(data.ToArray());
-                   // Text = DESCryptOperation(Text, Key.ToArray(), DESshifr.IV, true);
                 });
             }
         }
@@ -112,7 +108,6 @@ namespace Labs4Code.Model
                 return new RelayCommand(sender =>
                 {
                     Text = Decrypte(Encoding.Default.GetBytes(Text), Key.ToArray(), DESshifr.IV);
-                    //DESCryptOperation(Text, Key.ToArray(), DESshifr.IV, false);
                 });
             }
         }

@@ -28,7 +28,6 @@ namespace Labs4Code.Model
 
         #endregion
 
-
         private string textin;
         /// <summary>
         /// Кодируемый текс

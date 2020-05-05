@@ -8,110 +8,146 @@
     WindowStartupLocation="CenterScreen"
     ShowIconOnTitleBar="True"
     SizeToContent="WidthAndHeight"
-    FontSize="18"
-    Title="Лабораторная №7">
+    FontSize="18">
 
-    <Grid
-        DataContext="{Binding BitNonceLAb}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition
-                Width="auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel
-            Grid.Column="0">
-            <StackPanel
-                Orientation="Horizontal"
-                Margin="10">
-                <Label
-                    Content="Value = " />
-                <TextBox
-                    Text="{Binding ComputeValue}"
-                    Width="200"
-                    Height="30"
-                    FontSize="18"
-                    TextAlignment="Center" />
-            </StackPanel>
-            <StackPanel
-                Margin="10"
-                Orientation="Horizontal">
-                <Label
-                    Content="Число нулей:" />
-                <TextBox
-                    Margin="10,0"
-                    Text="{Binding CountOfZero}"
-                    Width="100"
-                    Height="30"
-                    FontSize="18"
-                    TextAlignment="Center" />
-            </StackPanel>
-            <Button
-                Background="{DynamicResource AccentBaseColorBrush}"
-                Margin="20, 10"
-                Height="40"
-                Content="Подобрать NONCE"
-                FontSize="18"
-                Foreground="White"
-                Command="{Binding GetResultCommand}"
-                CommandParameter="Main" />
-
-            <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                Margin="10">
-                <TextBlock
-                    Text="NONCE = "
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" />
-                <TextBox
-                    Margin="5"
-                    Text="{Binding Nonce}"
-                    Width="200"
-                    Height="30"
-                    FontSize="18"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                    TextAlignment="Center" />
-            </StackPanel>
-
-            <Button
-                Background="{DynamicResource AccentBaseColorBrush}"
-                Margin="20, 10"
-                Height="40"
-                Content="Очистить решение"
-                FontSize="18"
-                Foreground="White"
-                Command="{Binding CleanCommand}"
-                CommandParameter="Main" />
-
-        </StackPanel>
-
+    <StackPanel>
+        <TextBlock
+            Text="Подбор NONCE"
+            TextWrapping="Wrap"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="5,5,0,2"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource AccentColorBrush}" />
         <Separator
-            Grid.Row="0"
-            Grid.Column="1"
-            Background="{DynamicResource AccentBaseColorBrush}"
-            Margin="10">
-            <Separator.LayoutTransform>
-                <RotateTransform
-                    Angle="90" />
-            </Separator.LayoutTransform>
-        </Separator>
+            Background="{DynamicResource AccentColorBrush2}"
+            Margin="5,2" />
+        <Grid
+            DataContext="{Binding BitNonceLAb}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition
+                    Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="0">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="10">
+                    <Label
+                        Content="Value = " />
+                    <TextBox
+                        Text="{Binding ComputeValue}"
+                        Width="200"
+                        Height="30"
+                        FontSize="18"
+                        TextAlignment="Center"
+                        BorderBrush="{DynamicResource AccentColorBrush2}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="10"
+                    Orientation="Horizontal">
+                    <Label
+                        Content="Число нулей:" />
+                    <TextBox
+                        Margin="10,0"
+                        Text="{Binding CountOfZero}"
+                        Width="100"
+                        Height="30"
+                        FontSize="18"
+                        TextAlignment="Center"
+                        BorderBrush="{DynamicResource AccentColorBrush2}" />
+                </StackPanel>
+                <Button
+                    Background="{DynamicResource AccentBaseColorBrush}"
+                    Margin="20, 10"
+                    Height="40"
+                    Content="Подобрать NONCE"
+                    FontSize="18"
+                    Foreground="White"
+                    Command="{Binding GetResultCommand}"
+                    CommandParameter="Main" />
 
-        <StackPanel
-            Grid.Column="2">
-            <ListBox
-                Margin="5"
-                BorderBrush="{DynamicResource AccentColorBrush}"
-                BorderThickness="2"
-                HorizontalContentAlignment="Left"
-                ScrollViewer.CanContentScroll="True"
-                ItemsSource="{Binding HashResultCollection}"
-                Height="275"
-                Width="350"
-                ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
-            </ListBox>
-        </StackPanel>
-    </Grid>
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+                    <TextBlock
+                        Text="NONCE = "
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left" />
+                    <TextBox
+                        Margin="5"
+                        Text="{Binding Nonce}"
+                        Width="200"
+                        Height="30"
+                        FontSize="18"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        BorderBrush="{DynamicResource AccentColorBrush2}"
+                        TextAlignment="Center" />
+                </StackPanel>
+
+                <Button
+                    Background="{DynamicResource AccentBaseColorBrush}"
+                    Margin="20, 10"
+                    Height="40"
+                    Content="Очистить решение"
+                    FontSize="18"
+                    Foreground="White"
+                    Command="{Binding CleanCommand}"
+                    CommandParameter="Main" />
+
+            </StackPanel>
+
+            <Separator
+                Grid.Row="0"
+                Grid.Column="1"
+                Background="{DynamicResource AccentBaseColorBrush}"
+                Margin="10">
+                <Separator.LayoutTransform>
+                    <RotateTransform
+                        Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+
+            <StackPanel
+                Grid.Column="2">
+                <Label
+                    Content="Вычисления:"
+                    Margin="5" />
+                <ListBox
+                    Margin="5"
+                    BorderBrush="{DynamicResource AccentColorBrush}"
+                    BorderThickness="2"
+                    HorizontalContentAlignment="Left"
+                    ScrollViewer.CanContentScroll="True"
+                    ItemsSource="{Binding HashResultCollection}"
+                    Height="190"
+                    Width="350"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                </ListBox>
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="5">
+                    <Label
+                        Content="Результат: "
+                        VerticalAlignment="Center" />
+                    <TextBox
+                        Text="{Binding TextOut}"
+                        Width="240"
+                        Margin="10,0"
+                        Height="45"
+                        FontSize="18"
+                        
+                        TextAlignment="Left"
+                        BorderBrush="{DynamicResource AccentColorBrush2}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+   
 
 </control:MetroWindow>

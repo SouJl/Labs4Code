@@ -4,28 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:convert="clr-namespace:Labs4Code.Converter"
-    ResizeMode="CanResize"
+    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     ShowIconOnTitleBar="True"
     SizeToContent="WidthAndHeight"
-    Title="Лабораторная №2"
-    FontSize="18"
-    MinWidth="500"
-    MaxWidth="500"
-    MinHeight="600">
+    FontSize="18">
     
-    <StackPanel
-        Background="LightGray">
-        <Label 
-            Content="Метод Вернама"
-            HorizontalAlignment="Center"
-            Margin="0,5"
-            FontWeight="DemiBold"/>
+    <StackPanel>
+        <TextBlock
+            Text="Метод Вернама"
+            TextWrapping="Wrap"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="5,5,0,2"
+            FontWeight="DemiBold"
+            Foreground="{DynamicResource AccentColorBrush}" />
         <Separator
-            Height="5"
-            Margin="10,0,10,5"
-            Background="Black">
-        </Separator>
+            Background="{DynamicResource AccentColorBrush2}"
+            Margin="5,2" />
         <Grid
             DataContext="{Binding VernamCrypt}">
             <Grid.RowDefinitions>
@@ -43,11 +39,9 @@
                 Grid.Column="0">
                 <Label
                     Content="Ключ:"
-                    Margin="5"
-                    Foreground="Coral"
-                    FontWeight="DemiBold" />
+                    Margin="5" />
                 <TextBox
-                    BorderBrush="Black"
+                    BorderBrush="{DynamicResource AccentColorBrush2}"
                     Margin="5"
                     Text="{Binding Key}"
                     MinWidth="150"
@@ -63,11 +57,9 @@
                 Grid.Column="0">
                 <Label
                     Content="Ввод/вывод текста:"
-                    Margin="5"
-                    Foreground="Coral"
-                    FontWeight="DemiBold" />
+                    Margin="5"/>
                 <TextBox
-                    BorderBrush="Black"
+                    BorderBrush="{DynamicResource AccentColorBrush2}"
                     Margin="5"
                     Text="{Binding Text}"
                     MinWidth="150"
@@ -81,35 +73,36 @@
             <Border
                 Grid.Column="1"
                 Grid.RowSpan="3"
-                BorderThickness="1"
-                BorderBrush="Black"
+                BorderThickness="2"
+                BorderBrush="{DynamicResource AccentColorBrush}"
                 Margin="5,10,5,5">
                 <StackPanel
                     VerticalAlignment="Center">
                     <Label 
                         Content="Операции с ключом"
                         FontSize="18"
-                        Foreground="Coral"
-                        FontWeight="DemiBold" 
                         HorizontalAlignment="Center"/>
                     <Button
                         Command="{Binding RandKeyCommand}"
                         Content="Сгенерировать ключ"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                     <Button
                         Command="{Binding KeyFileCommand}"
                         CommandParameter="Write"
                         Content="Сохранить в файл"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                     <Button
                         Command="{Binding KeyFileCommand}"
                         CommandParameter="Read"
                         Content="Загрузить из файла"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                 </StackPanel>
@@ -120,7 +113,8 @@
                     Command="{Binding EncrypteCommand}"
                     DockPanel.Dock="Left"
                     Content="Кодирование"
-                    Background="Coral"
+                    Foreground="White"
+                    Background="{DynamicResource AccentColorBrush}"
                     Height="40"
                     Width="120"
                     Margin="5,5"/>
@@ -128,7 +122,8 @@
                     Command="{Binding DecrypteCommand}"
                     DockPanel.Dock="Right"
                     Content="Декодирование"
-                    Background="Coral"
+                    Foreground="White"
+                    Background="{DynamicResource AccentColorBrush}"
                     Height="40"
                     Width="120"
                     Margin="5,5"/>
@@ -136,18 +131,23 @@
         </Grid>
 
         <Separator
-            Height="5"
-            Margin="10,5,10,0"
-            Background="Black">
+            Margin="5,10"
+            Background="{DynamicResource AccentColorBrush}">
         </Separator>
         
         <StackPanel
             DataContext="{Binding DesCrypt}">
-            <Label
-                Content="Блочное шифрование"
-                HorizontalAlignment="Center"
-                Margin="0,5"
-                FontWeight="DemiBold" />
+            <TextBlock
+                Text="Блочное шифрование"
+                TextWrapping="Wrap"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="5,5,0,2"
+                FontWeight="DemiBold"
+                Foreground="{DynamicResource AccentColorBrush}" />
+            <Separator
+                Background="{DynamicResource AccentColorBrush2}"
+                Margin="5,2" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition 
@@ -160,7 +160,7 @@
                     Margin="10,10">
                     <TextBox 
                         Height="125"
-                        BorderBrush="Black"
+                        BorderBrush="{DynamicResource AccentColorBrush2}"
                         TextWrapping="Wrap"
                         VerticalScrollBarVisibility="Auto"
                         HorizontalContentAlignment="Left"
@@ -173,27 +173,30 @@
                     <Button
                         Command="{Binding EncrypteCommand}"
                         Content="Кодирование"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="5" />
                     <Button
                         Command="{Binding DecrypteCommand}"
                         Content="Декодирование"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="5" />
                     <Button
                         Command="{Binding KeyOpenParamCommand}"
                         Content="Параметры"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="5" />
                 </StackPanel>
             </Grid>
             <Border
                 convert:BoolToVisibleConvert.IsVisible="{Binding Visibility}"
-                BorderBrush="Black"
-                BorderThickness="1"
+                BorderBrush="{DynamicResource AccentColorBrush}"
+                BorderThickness="2"
                 Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -205,21 +208,24 @@
                         Grid.Column="0"
                         Command="{Binding RandKeyCommand}"
                         Content="Сгенерировать ключ"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                     <Button
                         Grid.Column="1"
                         Command="{Binding LoadKeyCommand}"
                         Content="Загрузить из файла"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                     <Button
                         Grid.Column="2"
                         Command="{Binding SaveKeyCommand}"
                         Content="Сохранить в файл"
-                        Background="Coral"
+                        Foreground="White"
+                        Background="{DynamicResource AccentColorBrush}"
                         Height="35"
                         Margin="10" />
                 </Grid>
