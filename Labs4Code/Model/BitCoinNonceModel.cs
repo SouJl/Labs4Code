@@ -112,10 +112,9 @@ namespace Labs4Code.Model
         /// </summary>
         private SHA256 Hash { get; set; }
 
-        public BitCoinNonceModel()
+        public BitCoinNonceModel() 
         {
             Hash = SHA256.Create();
-            HashResultCollection = new ObservableCollection<string>();
         }
 
         /// <summary>
@@ -127,7 +126,25 @@ namespace Labs4Code.Model
             {
                 return new RelayCommand(sender =>
                 {
+
+                    HashResultCollection = new ObservableCollection<string>();
+                    TextOut = null;
                     GetZeroHahResult();
+                });
+            }
+        }
+
+        /// <summary>
+        /// Команда очистки вычислений
+        /// </summary>
+        public ICommand CleanCommand
+        {
+            get
+            {
+                return new RelayCommand(sender =>
+                {
+                    HashResultCollection.Clear();
+                    TextOut = null;
                 });
             }
         }

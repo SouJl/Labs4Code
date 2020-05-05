@@ -107,8 +107,9 @@ namespace Labs4Code.Model
             {
                 return new RelayCommand(sender =>
                 {
-                    Text = Decrypte(Encoding.Default.GetBytes(Text), Key.ToArray(), DESshifr.IV);
-                });
+                    string result = Decrypte(Encoding.Default.GetBytes(Text), Key.ToArray(), DESshifr.IV);
+                    if (result != null) Text = result;
+                 });
             }
         }
 
@@ -157,7 +158,7 @@ namespace Labs4Code.Model
             {
                 return new RelayCommand(sender =>
                 {
-                    var file = new OpenFileDialog();
+                    var file = new SaveFileDialog();
                     string filepath = null;
                     file.Filter = "text files (*.txt)|*.txt";
                     if (file.ShowDialog() == true)
@@ -225,6 +226,7 @@ namespace Labs4Code.Model
             byte[] outBlock = xfrm.TransformFinalBlock(inBlock, 0, inBlock.Length);
             return outBlock;
         }
+
         public string Decrypte(byte[] data, byte[] Key, byte[] IV)
         {
             try
