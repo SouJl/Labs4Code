@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    ResizeMode="CanResize"
+    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     ShowIconOnTitleBar="True"
     SizeToContent="WidthAndHeight"
