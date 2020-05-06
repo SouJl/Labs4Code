@@ -215,20 +215,14 @@ namespace Labs4Code.Model
         {
             ObservableCollection<string> result = new ObservableCollection<string>();
             
-            BigInteger bi;
-
             for (int i = 0; i < data.Count; i++)
             {
-                bi = new BigInteger(data[i]);
-                bi = BigInteger.Pow(bi, e_value);
-
-                BigInteger N = new BigInteger(n_value);
-
-                bi = bi % N;
-                result.Add(bi.ToString());
+                int val = ModePow(Convert.ToInt32(data[i]), e_value, n_value);
+                result.Add(val.ToString());
             }
             return result;
         }
+
 
         /// <summary>
         /// Декодирование данных
@@ -240,23 +234,38 @@ namespace Labs4Code.Model
         private string Decode(ObservableCollection<string> data, int d, int n)
         {           
             List<byte> decodeData = new List<byte>();
-            
-            BigInteger bi;
-
+           
             foreach (string item in data)
             {
-                bi = new BigInteger(Convert.ToDouble(item));
-                bi = BigInteger.Pow(bi, d);
-
-                BigInteger N = new BigInteger(n);
-
-                bi = bi % N;
-
-                decodeData.Add((byte)bi);
+                int val = ModePow(Convert.ToInt32(item), d, n);
+                decodeData.Add((byte)val);
 
             }
             return Encoding.Unicode.GetString(decodeData.ToArray());
         }
+
+        /// <summary>
+        /// Быстрое возведение в степень.
+        /// </summary>
+        /// <param name="a">основание</param>
+        /// <param name="x">степень</param>
+        /// <param name="p">делитель</param>
+        /// <returns></returns>
+        private int ModePow(int a, int x, int p)
+        {
+            int result = 1;
+            while (x != 0)
+            {
+                if (x % 2 != 0)
+                {
+                    result = (result * a) % p;
+                }
+                a = (a * a) % p;
+                x /= 2;
+            }
+            return result;
+        }
+
 
         #region Вычисления
 
@@ -349,5 +358,6 @@ namespace Labs4Code.Model
         }
 
         #endregion
+
     }
 }
